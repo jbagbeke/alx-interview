@@ -41,17 +41,17 @@ def print_log_statistics() -> None:
 
 
 # SIGINT handler function
-def handle_sigint(sig, frame):
-    """
-    Handles SIGINT signals from stdin
-    """
-    if sig == signal.SIGINT:
-        print_log_statistics()
-        sys.exit(0)
+# def handle_sigint(sig, frame):
+#     """
+#     Handles SIGINT signals from stdin
+#     """
+#     if sig == signal.SIGINT:
+#         print_log_statistics()
+#         sys.exit(0)
 
 
-# Register signal handler
-signal.signal(signal.SIGINT, handle_sigint)
+# # Register signal handler
+# signal.signal(signal.SIGINT, handle_sigint)
 
 
 for log_input in sys.stdin:
