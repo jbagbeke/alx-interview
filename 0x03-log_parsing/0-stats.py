@@ -50,12 +50,13 @@ def handle_sigint(sig, frame):
 signal.signal(signal.SIGINT, handle_sigint)
 
 
-for log_input in sys.stdin:
-    log_match = re.match(log_pattern, log_input.strip('\n'))
+pattern = r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} - \[[^\]]+\] "GET /projects/260 HTTP/1\.1" \d{3} \d+$'
 
-
-    if not log_match:
+for log_input in sys.stdin:    
+    if not re.match(pattern, log_input.strip()):
         continue
+
+    log_match = re.match(log_pattern, log_input.strip('\n'))
 
     if log_match:
         status_code = handle_size_status_code(log_match.group(4))
