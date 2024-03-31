@@ -29,8 +29,7 @@ def print_log_statistics():
     """
     Prints log statistics with format - <status code>: <number>
     """
-    if total_file_size > 0:
-        print("File size: {}".format(total_file_size))
+    print("File size: {}".format(total_file_size))
 
     for stat_code in sorted(status_code_count.keys()):
         if status_code_count[stat_code] > 0:
