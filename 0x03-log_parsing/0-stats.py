@@ -63,9 +63,7 @@ for log_input in sys.stdin:
         if status_code and file_size:
             total_file_size += file_size
             status_code_count[str(status_code)] += 1
-        else:
-            continue
-    line_counter += 1
+        line_counter += 1
 
     if line_counter == 10:
         print_log_statistics()
