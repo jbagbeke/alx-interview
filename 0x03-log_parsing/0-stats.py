@@ -4,7 +4,6 @@ Log parsing from stdin
 """
 import signal
 import sys
-from typing import Union
 import re
 
 
@@ -15,7 +14,7 @@ status_code_count = {'200': 0, '301': 0, '400': 0, '401': 0,
 line_counter = 0
 
 
-def handle_size_status_code(status_code: str) -> Union[int, None]:
+def handle_size_status_code(status_code):
     """
     Converts status code to and file size to int
     """
@@ -27,7 +26,7 @@ def handle_size_status_code(status_code: str) -> Union[int, None]:
 
 
 # Printing log stat function
-def print_log_statistics() -> None:
+def print_log_statistics():
     """
     Prints log statistics with format - <status code>: <number>
     """
