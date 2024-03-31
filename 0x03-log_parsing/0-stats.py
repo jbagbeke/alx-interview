@@ -29,7 +29,8 @@ def print_log_statistics():
     """
     Prints log statistics with format - <status code>: <number>
     """
-    print("File size: {}".format(total_file_size))
+    if total_file_size > 0:
+        print("File size: {}".format(total_file_size))
 
     for stat_code in sorted(status_code_count.keys()):
         if status_code_count[stat_code] > 0:
@@ -53,7 +54,7 @@ try:
         if line_counter == 10:
             print_log_statistics()
             line_counter = 0
-    # print_log_statistics()
+    print_log_statistics()
 except KeyboardInterrupt as e:
     print_log_statistics()
     raise(e)
