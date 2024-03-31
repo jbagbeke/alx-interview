@@ -71,3 +71,5 @@ for log_input in sys.stdin:
     if line_counter == 10:
         print_log_statistics()
         line_counter = 0
+
+print_log_statistics()
