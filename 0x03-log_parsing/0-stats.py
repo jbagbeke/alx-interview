@@ -54,6 +54,6 @@ try:
             print_log_statistics()
             line_counter = 0
     print_log_statistics()
-except KeyboardInterrupt as e:
+except KeyboardInterrupt:
     print_log_statistics()
-    raise(e)
+    raise
