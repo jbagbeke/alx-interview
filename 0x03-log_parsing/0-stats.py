@@ -32,9 +32,7 @@ def print_log_statistics():
     """
     print("File size: {}".format(total_file_size))
 
-    sorted_status_codes = sorted(status_code_count.keys())
-
-    for stat_code in sorted_status_codes:
+    for stat_code in sorted(status_code_count.keys()):
         if status_code_count[stat_code] > 0:
             print("{}: {}".format(stat_code, status_code_count[stat_code]))
 
@@ -54,6 +52,10 @@ signal.signal(signal.SIGINT, handle_sigint)
 
 for log_input in sys.stdin:
     log_match = re.match(log_pattern, log_input.strip('\n'))
+
+
+    if not log_match:
+        continue
 
     if log_match:
         status_code = handle_size_status_code(log_match.group(4))
