@@ -19,8 +19,7 @@ def handle_size_status_code(status_code):
     Converts status code to and file size to int
     """
     try:
-        status_code = int(status_code)
-        return status_code
+        return int(status_code)
     except ValueError:
         return None
 
@@ -37,35 +36,24 @@ def print_log_statistics():
             print("{}: {}".format(stat_code, status_code_count[stat_code]))
 
 
-# # SIGINT handler function
-# def handle_sigint(sig, frame):
-#     """
-#     Handles SIGINT signals from stdin
-#     """
-#     print_log_statistics()
-#     sys.exit(0)
+try:
+    for log_input in sys.stdin:
+        log_match = re.match(log_pattern, log_input.strip('\n'))
 
+        if log_match:
+            status_code = handle_size_status_code(log_match.group(4))
+            file_size = handle_size_status_code(log_match.group(5))
 
-# # Register signal handler
-# signal.signal(signal.SIGINT, handle_sigint)
+            # Valid status code and file Size
+            if status_code and file_size:
+                total_file_size += file_size
+                status_code_count[str(status_code)] += 1
+            line_counter += 1
 
-
-
-for log_input in sys.stdin:
-    log_match = re.match(log_pattern, log_input.strip('\n'))
-
-    if log_match:
-        status_code = handle_size_status_code(log_match.group(4))
-        file_size = handle_size_status_code(log_match.group(5))
-
-        # Valid status code and file Size
-        if status_code and file_size:
-            total_file_size += file_size
-            status_code_count[str(status_code)] += 1
-        line_counter += 1
-
-    if line_counter == 10:
-        print_log_statistics()
-        line_counter = 0
-
-print_log_statistics()
+        if line_counter == 10:
+            print_log_statistics()
+            line_counter = 0
+    print_log_statistics()
+except KeyboardInterrupt as e:
+    print_log_statistics()
+    raise(e)
