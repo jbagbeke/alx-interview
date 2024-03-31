@@ -37,17 +37,17 @@ def print_log_statistics():
             print("{}: {}".format(stat_code, status_code_count[stat_code]))
 
 
-# SIGINT handler function
-def handle_sigint(sig, frame):
-    """
-    Handles SIGINT signals from stdin
-    """
-    print_log_statistics()
-    sys.exit(0)
+# # SIGINT handler function
+# def handle_sigint(sig, frame):
+#     """
+#     Handles SIGINT signals from stdin
+#     """
+#     print_log_statistics()
+#     sys.exit(0)
 
 
-# Register signal handler
-signal.signal(signal.SIGINT, handle_sigint)
+# # Register signal handler
+# signal.signal(signal.SIGINT, handle_sigint)
 
 
 
