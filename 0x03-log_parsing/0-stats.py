@@ -10,7 +10,8 @@ import re
 
 log_pattern = r'(.*?)\s-\s\[(.*?)\]\s"(.*?)"\s(\d{3})\s(.*?)\Z'
 total_file_size = 0
-status_code_count = {}
+status_code_count = {'200': 0, '301': 0, '400': 0, '401': 0,
+                     '403': 0, '404': 0, '405': 0, '500': 0}
 line_counter = 0
 
 
@@ -35,7 +36,8 @@ def print_log_statistics() -> None:
     sorted_status_codes = sorted(status_code_count.keys())
 
     for stat_code in sorted_status_codes:
-        print("{}: {}".format(stat_code, status_code_count[stat_code]))
+        if status_code_count[stat_code] > 0:
+            print("{}: {}".format(stat_code, status_code_count[stat_code]))
 
 
 # SIGINT handler function
@@ -62,11 +64,7 @@ for log_input in sys.stdin:
         # Valid status code and file Size
         if status_code and file_size:
             total_file_size += file_size
-
-            if status_code not in status_code_count.keys():
-                status_code_count[status_code] = 1
-            else:
-                status_code_count[status_code] += 1
+            status_code_count[str(status_code)] += 1
     line_counter += 1
 
     if line_counter == 10:
