@@ -15,13 +15,11 @@ def validUTF8(data):
         byte_bin = bin(byte)[2:]
 
         if len(byte_bin) > 8:
-            valid_utf8 = False
-            break
+            return False
 
         byte_bin = byte_bin.zfill(8)
 
         if byte_count == 0:
-
             continuation_bits = 0
 
             for i in byte_bin:
@@ -29,12 +27,16 @@ def validUTF8(data):
                     break
                 continuation_bits += 1
 
-            byte_count = continuation_bits
+            if continuation_bits == 0:
+                continue 
+            elif continuation_bits == 1:
+                return False
+
+            byte_count = continuation_bits - 1
             continue
 
         if byte_count > 0:
             if byte_bin[:2] != '10':
-                valid_utf8 = False
-                break
+                return False
             byte_count -= 1
     return valid_utf8
