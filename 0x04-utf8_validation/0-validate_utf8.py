@@ -8,7 +8,6 @@ def validUTF8(data):
     """
     Validate utf-8 code encryption
     """
-    valid_utf8 = True
     byte_count = 0
 
     for byte in data:
@@ -29,7 +28,7 @@ def validUTF8(data):
 
             if continuation_bits == 0:
                 continue 
-            elif continuation_bits == 1:
+            elif continuation_bits == 1 or continuation_bits > 4:
                 return False
 
             byte_count = continuation_bits - 1
@@ -39,4 +38,4 @@ def validUTF8(data):
             if byte_bin[:2] != '10':
                 return False
             byte_count -= 1
-    return valid_utf8
+    return byte_count == 0
