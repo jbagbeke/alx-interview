@@ -22,10 +22,10 @@ def validUTF8(data):
                 continuation_bits += 1
 
             if continuation_bits == 0:
-                continue 
+                continue
             elif continuation_bits == 1 or continuation_bits > 4:
                 return False
-            
+
             if continuation_bits > 1 and byte_bin[1] == '0':
                 return False
 
