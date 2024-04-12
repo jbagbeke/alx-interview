@@ -66,3 +66,7 @@ def n_queens():
         for q, x in enumerate(arr):
             result.append([q, x])
         print(result)
+
+
+if __name__ == '__main__':
+    n_queens()
