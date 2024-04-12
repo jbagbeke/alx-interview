@@ -66,4 +66,3 @@ def n_queens():
         for q, x in enumerate(arr):
             result.append([q, x])
         print(result)
-
