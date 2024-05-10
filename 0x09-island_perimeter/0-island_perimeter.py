@@ -10,30 +10,20 @@ def island_perimeter(grid):
     """
     perimeter = 0
 
-    for row_idx in range(len(grid)):
-        row_prev = row_idx - 1
-        row_next = row_idx + 1 if (row_idx + 1) <= len(grid) else -1
-        row_len = len(grid[row_idx])
+    for row in range(len(grid)):
+        grid_len = len(grid)
+        row_len = len(grid[row])
 
         for idx in range(row_len):
-            prev = idx - 1
-            next = idx + 1 if (idx + 1) <= row_len else -1
+            if grid[row][idx] == 1:
+                perimeter += 4
 
-            if grid[row_idx][idx] == 1:
-                if row_prev < 0 or row_next >= len(grid):
-                    perimeter += 1
-                if prev < 0 or next >= row_len:
-                    perimeter += 1
-                if row_prev >= 0:
-                    if grid[row_prev][idx] == 0:
-                        perimeter += 1
-                if prev >= 0:
-                    if grid[row_idx][prev] == 0:
-                        perimeter += 1
-                if row_next > 0 and row_next < len(grid):
-                    if grid[row_next][idx] == 0:
-                        perimeter += 1
-                if next > 0:
-                    if grid[row_idx][next] == 0:
-                        perimeter += 1
+                if (row - 1) >= 0 and grid[row - 1][idx] == 1:
+                    perimeter -= 1
+                if (row + 1) < grid_len and grid[row + 1][idx] == 1:
+                    perimeter -= 1
+                if (idx - 1) >= 0 and grid[row][idx - 1] == 1:
+                    perimeter -= 1
+                if (idx + 1) < row_len and grid[row][idx + 1] == 1:
+                    perimeter -= 1
     return perimeter
