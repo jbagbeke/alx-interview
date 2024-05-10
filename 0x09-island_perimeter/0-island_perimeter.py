@@ -3,12 +3,13 @@
 Island Perimeter Problem solution
 """
 
+
 def island_perimeter(grid):
     """
     Function definition
     """
     perimeter = 0
-    
+
     for row_idx in range(len(grid)):
         row_prev = row_idx - 1
         row_next = row_idx + 1 if row_idx < len(grid) else -1
@@ -17,7 +18,7 @@ def island_perimeter(grid):
         for idx in range(row_len):
             prev = idx - 1
             next = idx + 1 if idx < row_len else -1
-            
+
             if grid[row_idx][idx] == 1:
                 if row_prev >= 0:
                     if grid[row_prev][idx] == 0:
