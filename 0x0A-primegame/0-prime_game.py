@@ -1,20 +1,30 @@
 #!/usr/bin/python3
-""" Prime game solution implementation """
+"""
+Prime game solution implementation
+"""
+
 
 def isWinner(x, nums):
-    """Checks for the winner"""
+    """
+    Checks for the winner of Prime Game
+    """
     if x <= 0 or not nums:
         return None
+
+    # Calculating the maximum of the number List
     max_number = max(nums)
 
     filter_sort = [True for _ in range(max(max_number + 1, 2))]
+
     for i in range(2, int(pow(max_number, 0.5)) + 1):
         if not filter_sort[i]:
             continue
         for j in range(i * i, max_number + 1, i):
             filter_sort[j] = False
     filter_sort[0] = filter_sort[1] = False
+
     a = 0
+
     for b in range(len(filter_sort)):
         if filter_sort[b]:
             a += 1
@@ -26,4 +36,5 @@ def isWinner(x, nums):
         return None
     if player_1 * 2 > len(nums):
         return "Maria"
+
     return "Ben"
